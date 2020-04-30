@@ -1,0 +1,32 @@
+{
+  "name": "code",
+  "version": "1.0.0",
+  "description": "typescript crowller",
+  "main": "index.js",
+  "scripts": {
+    "dev:ts": "ts-node ./src/crowller.ts",
+    "dev:build": "tsc -w",
+    "dev:start": "nodemon node ./build/crowller.js",
+    "dev": "concurrently \"npm run dev:build\" \"npm run dev:start\""
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "data/*"
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cheerio": "^0.22.18",
+    "@types/superagent": "^4.1.7",
+    "concurrently": "^5.2.0",
+    "nodemon": "^2.0.3",
+    "ts-node": "^8.9.1",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "superagent": "^5.2.2"
+  }
+}
