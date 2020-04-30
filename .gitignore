@@ -1,0 +1,8 @@
+
+#source ignore
+/crowller-code/build
+/crowller-code/node_modules
+/crowller-code/package-lock.json
+/crowller-code/data/*.json
+
+
