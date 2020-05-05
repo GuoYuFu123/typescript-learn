@@ -1,7 +1,10 @@
 
-#source ignore
-/crowller-code/build
+#crowller-code ignore
 /crowller-code/node_modules
+/crowller-code/build
 /crowller-code/package-lock.json
 
-
+#typescript 进阶 ignore
+/typescript进阶/node_modules
+/typescript进阶/build
+/typescript进阶/package-lock.json
