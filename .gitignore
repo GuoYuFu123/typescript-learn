@@ -7,4 +7,6 @@
 #typescript 进阶 ignore
 /typescript进阶/node_modules
 /typescript进阶/build
+/typescript进阶/dist
 /typescript进阶/package-lock.json
+/typescript进阶/.parcel-cache

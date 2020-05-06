@@ -5,13 +5,18 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsc -w",
-    "test": "ts-node ./src/2-3Enum枚举类型.ts"
+    "test": "ts-node ./src/2-3Enum枚举类型.ts",
+    "parcel": "parcel ./index-parcel.html"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "parcel": "^2.0.0-alpha.3.2",
     "ts-node": "^8.9.1",
     "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "jquery": "^3.5.1"
   }
 }
