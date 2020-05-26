@@ -10,3 +10,8 @@
 /typescript进阶/dist
 /typescript进阶/package-lock.json
 /typescript进阶/.parcel-cache
+
+#crowller-code-express ignore
+/crowller-code-express/node_modules
+/crowller-code-express/build
+/crowller-code-express/package-lock.json
