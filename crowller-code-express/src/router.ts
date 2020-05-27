@@ -1,18 +1,28 @@
-import { Router, Request, Response } from 'express';
-import Crowller from './crowller';
-import DellAnalyzer from './dellAnalyzer';
+import { Router, Request, Response, NextFunction } from 'express';
+import Crowller from './utils/crowller';
+import DellAnalyzer from './utils/dellAnalyzer';
 import fs from 'fs';
 import path from 'path';
+import { getResponseData } from './utils/utils'
 
-const router = Router();
-
-interface RequestWithBody extends Request {
+interface BodyRequest extends Request {
   body: {
     [key: string]: string | undefined;
   }
 }
 
-router.get('/', (req: Request, res: Response) => {
+const router = Router();
+
+const checkLogin = (req: Request, res: Response, next: NextFunction) => {
+  const isLogin = req.session ? req.session.login : false;
+  if (isLogin) {
+    next();
+  } else {
+    res.json(getResponseData(null, '请先登录'));
+  }
+};
+
+router.get('/', (req: BodyRequest, res: Response) => {
   const isLogin = req.session ? req.session.login : undefined;
   if (isLogin) {
     res.send(`
@@ -39,11 +49,11 @@ router.get('/', (req: Request, res: Response) => {
 
 })
 
-router.post('/login', (req: RequestWithBody, res: Response) => {
+router.post('/login', (req: BodyRequest, res: Response) => {
   const { password } = req.body;
   const isLogin = req.session ? req.session.login : undefined;
   if (isLogin) {
-    res.send('已经登录过')
+    res.json(getResponseData(true));
   } else {
     if (password === '123') {
       if (req.session) {
@@ -53,20 +63,19 @@ router.post('/login', (req: RequestWithBody, res: Response) => {
         }, 2000)
       }
     } else {
-      res.send('登录失败')
+      res.json(getResponseData(false, '登录失败'));
     }
   }
 })
 
-router.get('/logout', (req: RequestWithBody, res: Response) => {
+router.get('/logout', (req: BodyRequest, res: Response) => {
   if (req.session) {
     req.session.login = undefined;
   }
-  res.redirect('/');
-  // res.send("已经退出了")
+  res.json(getResponseData(true));
 })
 
-router.get('/getData', (req: RequestWithBody, res: Response) => {
+router.get('/getData', checkLogin, (req: BodyRequest, res: Response) => {
   const isLogin = req.session ? req.session.login : false;
   if (isLogin) {
     // 爬虫url：http://www.dell-lee.com/typescript/demo.html?secret=secret
@@ -74,24 +83,24 @@ router.get('/getData', (req: RequestWithBody, res: Response) => {
     const url = `http://www.dell-lee.com/typescript/demo.html?secret=${secret}`;
     const anlayzer = DellAnalyzer.getInstance();
     new Crowller(url, anlayzer);
-    res.send('getData success')
+    res.json(getResponseData("爬取成功"));
   } else {
-    res.send('请登录后进行爬取')
+    res.json(getResponseData(false, "用户尚未登录，请登录之后进行数据爬取"));
   }
 })
 
-router.get('/showData', (req: RequestWithBody, res: Response) => {
+router.get('/showData', checkLogin, (req: BodyRequest, res: Response) => {
   const isLogin = req.session ? req.session.login : false;
   if (isLogin) {
     try {
       const position = path.resolve(__dirname, '../data/course.json');
       const result = fs.readFileSync(position, 'utf-8');
-      res.json(JSON.parse(result));
+      res.json(getResponseData(JSON.parse(result)));
     } catch (e) {
-      res.send("尚未爬取到数据")
+      res.json(getResponseData(false, "暂无数据"));
     }
   } else {
-    res.send("用户尚未登录，请登录之后进行数据展示")
+    res.json(getResponseData(false, "用户尚未登录，请登录之后进行数据展示"));
   }
 })
 
