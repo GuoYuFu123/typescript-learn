@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node ./src/3-2类的装饰器2.ts"
+    "dev": "ts-node ./src/3-3方法的装饰器.ts"
   },
   "keywords": [],
   "author": "",
