@@ -17,6 +17,6 @@
 /crowller-code-express/package-lock.json
 
 #typescript 高级 ignore
-/typescript/node_modules
-/typescript/build
-/typescript/package-lock.json
+/typescript高级/node_modules
+/typescript高级/build
+/typescript高级/package-lock.json
