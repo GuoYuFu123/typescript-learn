@@ -20,3 +20,8 @@
 /typescript高级/node_modules
 /typescript高级/build
 /typescript高级/package-lock.json
+
+#crowller-code-express-2 ignore
+/crowller-code-express-2/node_modules
+/crowller-code-express-2/build
+/crowller-code-express-2/package-lock.json
