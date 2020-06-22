@@ -1,14 +1,14 @@
 import 'reflect-metadata';
 import { Request, Response } from 'express';
-import { controller, get, post } from './decorator';
+import { controller, get, post } from '../decorator';
 import { getResponseData } from '../utils/utils'
 
 interface BodyRequest extends Request {
     body: { [key: string]: string | undefined };
 }
 
-@controller
-class LoginController {
+@controller('/')
+export class LoginController {
     @post('/login')
     login(req: BodyRequest, res: Response) {
         const { password } = req.body;

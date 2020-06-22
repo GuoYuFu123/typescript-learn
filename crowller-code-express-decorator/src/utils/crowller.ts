@@ -10,7 +10,7 @@ export interface Analyzer {
 }
 
 class Crowller {
-  private readonly filePath = path.resolve(__dirname, '../data/course.json');
+  private readonly filePath = path.resolve(__dirname, '../../data/course.json');
 
   constructor(private url: string, private anlayzer: Analyzer) {
     this.initSpiderProcess()
@@ -28,6 +28,7 @@ class Crowller {
   }
   // 写文件
   writeFile(content: string) {
+    console.log(this.filePath);
     fs.writeFileSync(this.filePath, content);
   }
 }

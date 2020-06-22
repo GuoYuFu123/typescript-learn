@@ -21,7 +21,7 @@
 /typescript高级/build
 /typescript高级/package-lock.json
 
-#crowller-code-express-2 ignore
-/crowller-code-express-2/node_modules
-/crowller-code-express-2/build
-/crowller-code-express-2/package-lock.json
+#crowller-code-express-decorator ignore
+/crowller-code-express-decorator/node_modules
+/crowller-code-express-decorator/build
+/crowller-code-express-decorator/package-lock.json
